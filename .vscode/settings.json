@@ -5,5 +5,7 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "liveshare.allowGuestDebugControl": true
+    "liveshare.allowGuestDebugControl": true,
+    "python.pythonPath": "c:\\Users\\Noler\\Git\\Algeo02-19029\\Algeo\\Scripts\\python.exe",
+    "code-runner.runInTerminal": true
 }
