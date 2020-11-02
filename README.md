@@ -16,8 +16,18 @@ List library yang digunakan:
 4. Math
 5. Beautiful Soup
 6. Requests
+7. Flask
+8. Flask_SQLAlchemy
 
 ## Setup
-Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py
+### Tugas Besar ini menggunakan python3
+1. Run Windows PowerShell as Administrator
+2. Copy paste *Set-ExecutionPolicy Unrestricted* -Force pada Windows Powershell
+3. Install library Virtual Environment dengan menggunakan *pip3 install virtualenv*
+4. Kemudian clone repo ini
+5. Ganti directory pada file pyenv.cfg dalam folder Algeo dengan directory tempat install python.exe (Ganti "noler" dengan nama user pada windows yang digunakan atau ganti dengan directory ke python.exe)
+6. Buka Folder hasil clone repository ini pada VSCode dan ketik *.\Algeo\Scripts\activate* dalam terminal VSCode
+
+Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
 
 ## Screenshots
