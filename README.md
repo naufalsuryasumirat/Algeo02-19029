@@ -18,6 +18,8 @@ List library yang digunakan:
 6. Requests
 7. Flask
 8. Flask_SQLAlchemy
+9. lxml (tentative)
+10. cssselect (tentative)
 
 ## Setup
 ### Tugas Besar ini menggunakan python3
