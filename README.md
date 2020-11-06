@@ -29,11 +29,6 @@ List library yang digunakan:
 4. Kemudian clone repo ini
 5. Ganti directory pada file pyenv.cfg dalam folder Algeo dengan directory tempat install python.exe (Ganti "noler" dengan nama user pada windows yang digunakan atau ganti dengan directory ke python.exe)
 6. Buka Folder hasil clone repository ini pada VSCode dan ketik *.\Algeo\Scripts\activate* dalam terminal VSCode
-<<<<<<< Updated upstream
-=======
-
-Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
->>>>>>> Stashed changes
 
 Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
 
