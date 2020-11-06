@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from testing import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'

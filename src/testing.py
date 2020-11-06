@@ -75,6 +75,11 @@ def get_vectorwords(List_document):
 # Hasil : [[('kata1_doc1', jumlah), ...], [('kata1_doc2', jumlah), ...], ...]
     list_vectorwords = []
     stop_words = set(stopwords.words('indonesian'))
+
+    # Pake stop_words
+    not_in_stop_words = ["—", "’"]
+    stop_words.update(not_in_stop_words)
+
     for document in range (len(List_document)):
         artikel = List_document[document].translate(str.maketrans('','',string.punctuation)).lower()
         tokenized_artikel = nltk.tokenize.word_tokenize(artikel)
@@ -117,7 +122,60 @@ def get_similarity(Query, List_processedwords):
         list_similarity.append(sim)
     return list_similarity
 
-# test query
+def get_banyakkata(List_processedwords):
+# Menerima input List hasil get_vectorwords
+# Mengembalikan banyak kata (yang sudah di hilangkan stopwords)
+# Hasil list of integers
+    jumlah = 0
+    list_jumlah = []
+    for i in range (len(List_processedwords)):
+        for j in range (len(List_processedwords[i])):
+            jumlah = jumlah + List_processedwords[i][j][1]
+        list_jumlah.append(jumlah)
+    return list_jumlah
+## Fungsi belom dicek tolong dicek nanti
+
+
+# TAMBAHIN QUERY DALEM FUNGSI INI
+def get_allwordsfromalldocuments(List_document):
+# Menerima input list dokumen yang telah diambil
+# Memproses untuk mendapatkan semua kata dalam semua dokumen
+# Mengembalikan dalam bentuk list of words
+    all_words = ""
+    stop_words = set(stopwords.words('indonesian'))
+
+    # Pake stop_words
+    not_in_stop_words = ["—", "’"]
+    stop_words.update(not_in_stop_words)
+
+    # — ’ ini karakternya aneh bet tambahin ke stopwords mungkin
+
+    for i in range(len(List_document)):
+        all_words += List_document[i]
+
+    all_words = all_words.translate(str.maketrans('','',string.punctuation)).lower()
+    tokenized_words = nltk.tokenize.word_tokenize(all_words)
+    list_allwords = []
+    for word in tokenized_words:
+        if word not in stop_words:
+            list_allwords.append(word)
+    list_allwords = nltk.FreqDist(list_allwords)
+    list_allwords = list_allwords.most_common()
+
+    list_onlywords = []
+    for onlyword in range(len(list_allwords)):
+        list_onlywords.append(list_allwords[onlyword][0])
+
+    list_onlywords = sorted(list_onlywords)
+    return list_onlywords
+
+def print_similarity(ListofDictionary_results):
+# Untuk check jika similarity telah diurut
+    for x in ListofDictionary_results:
+        print(x['similarity'])
+    
+
+# list test query
 query = [('gol', 1), ('penalti', 1), ('kiper', 2), ('gawang', 2)]
 
 list_url = get_link("https://bola.kompas.com/liga-inggris")
@@ -148,7 +206,37 @@ list_processedwords = get_vectorwords(list_dokumen)
 
 # List similarity query dengan tiap dokumen
 list_similarity = get_similarity(query, list_processedwords)
-print_list(list_similarity)
+#print_list(list_similarity)
+# Buat fungsi buat dapetin Query hitung dengan tiap dokumen, isi list_similarity
+
+# List jumlah kata
+list_jumlahkata = get_banyakkata(list_processedwords)
+# mungkin diganti fungsinya buat jumlah seluruh kata dengan stopwords
+
+# List semua kata pada semua dokumen dan query
+# BELOM DITAMBAH QUERY
+list_allwords = get_allwordsfromalldocuments(list_dokumen)
+print(list_allwords)
+#print_list(list_allwords)
+#print(len(list_allwords))
+
+# Hasil search dalam bentuk list of dictionaries
+## BUAT FUNGSI GET_SEARCHRESULTS?
+## SORT BERDASARKAN VALUE SIMILARITY
+search_results = [  {"link"     : val[0], 
+                    "title"     : val[1], 
+                    "content"   : val[2], 
+                    "words"     : val[3], 
+                    "fsentence" : val[4],
+                    "similarity": val[5],
+                    "count"     : val[6]} 
+                    for val in zip(list_url, list_title, list_dokumen, list_processedwords, list_sentence, list_similarity, list_jumlahkata)]
+
+sorted_results = sorted(search_results, key = lambda k: k['similarity'], reverse = True)
+
+# Check isi dari sorted_results)
+print_similarity(sorted_results)
+#print(search_results[0])
 
 # to scrape: 
 # 1. text dari news article tag class_='read__content'
@@ -157,3 +245,12 @@ print_list(list_similarity)
 # 4. 
 # jadiin dictionary [link, judul, text, parsed_text, kalimat_pertama] //bisa ada update kalo butuh yang lain
 # tambahin hasil similarity dengan query
+
+
+## TENTUIN BERAPA DOKUMEN YANG MAU DIAMBIL
+## PAKE FOR LOOP BUAT NEXT PAGE
+
+## BERSIHIN GITHUB
+## src berisi source code
+## test berisi dokumen uji
+## doc berisi laporan
