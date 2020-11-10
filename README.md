@@ -27,8 +27,9 @@ List library yang digunakan:
 2. Copy paste *Set-ExecutionPolicy Unrestricted* -Force pada Windows Powershell
 3. Install library Virtual Environment dengan menggunakan *pip3 install virtualenv*
 4. Kemudian clone repo ini
-5. Ganti directory pada file pyenv.cfg dalam folder Algeo dengan directory tempat install python.exe (Ganti "noler" dengan nama user pada windows yang digunakan atau ganti dengan directory ke python.exe)
-6. Buka Folder hasil clone repository ini pada VSCode dan ketik *.\Algeo\Scripts\activate* dalam terminal VSCode
+5. Ganti directory pada file pyenv.cfg dalam folder Tubes dengan directory tempat install python.exe (Ganti "noler" dengan nama user pada windows yang digunakan atau ganti dengan directory ke python.exe)
+6. Buka Folder hasil clone repository ini pada VSCode dan ketik *.\src\Tubes\Scripts\activate* dalam terminal VSCode
+7. Pastikan Terminal VSCode berada pada directory dengan akhiran Algeo02-19029>
 
 Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
 
