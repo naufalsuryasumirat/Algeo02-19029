@@ -2,11 +2,13 @@ import requests
 import nltk
 import string
 import math
+import os
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 from nltk.corpus import stopwords
+from os import listdir
 
 def get_link(request):
 # Mengambil semua link dari main-page kompas liga-inggris dan mengembalikannya dalam bentuk list
@@ -79,6 +81,7 @@ def get_vectorwords(List_document):
     # Pake stop_words
     not_in_stop_words = ["—", "’"]
     stop_words.update(not_in_stop_words)
+    # Meng-update list kata stop_words untuk menghilangkan hal yang tidak diperlukan
 
     for document in range (len(List_document)):
         artikel = List_document[document].translate(str.maketrans('','',string.punctuation)).lower()
@@ -254,6 +257,137 @@ def scrape():
     scraping_results = sorted(scraping_results, key = lambda k: k['similarity'], reverse = True)
 
     toHTML(scraping_results)
+
+def get_link_local(path_to_uploads_folder):
+# Menerima path ke folder uploads pada src/
+# Mengirimkan path dengan tambahan semua nama file untuk dibuka dan diproses
+# Bentuk input: path = os.path.dirname(os.path.abspath(__file__))
+#               path_to_uploads = os.path.join(path, 'uploads')
+# Hasil sebuah list berisi path seperti: [c:\\Users\\..., c:\\Users...] (List_directory)
+    list_files = os.listdir(path_to_uploads_folder)
+    list_directory = []
+    for files in list_files:
+        pathdir = os.path.join(path_to_uploads_folder, str(files))
+        list_directory.append(pathdir)
+    return list_directory
+
+def get_title_local(List_directory):
+# Menerima List directory ke setiap file dalam src/uploads
+# (karena hasil upload file pada web disimpan di src/uploads)
+# Membalikan list berisi judul dari semua dokumen
+    list_title = []
+    for path in List_directory:
+        document_html = open(path)
+        soup = BeautifulSoup(document_html, 'lxml')
+        title = soup.find('h1')
+        list_title.append(title.text.strip())
+    return list_title
+
+def get_document_local(List_directory):
+# Menerima list directory ke setiap file dalam src/uploads
+# Mengambil isi berita dan mengembalikannya dalam bentuk list
+# Hasil : ["dokumen1", "dokumen2"]
+## Setelah itu menggunakan get_firstsentence untuk mendapatkan list kalimat pertamanya
+    List_document = []
+    for path in List_directory:
+        document_html = open(path)
+        soup = BeautifulSoup(document_html, 'lxml')
+        teks_artikel = soup.find('body')
+        string_teks = teks_artikel.get_text()
+        List_document.append(string_teks)
+    return List_document
+
+def get_query(Query):
+# Menerima Query dalam bahasa Indonesia dan mengembalikan sebagai list tuple kata dan jumlahnya
+# Menghilangkan kata-kata yang tidak relevan dalam Query
+# Contoh: "Pandemi Covid-19 sudah berjalan lebih dari delapan bulan, tetapi belum ada tanda-tanda penularan virus corona dapat dikendalikan"
+# Hasil: [('pandemi', 1), ('covid19', 1), ('berjalan', 1), ('delapan', 1), ('tandatanda', 1), ('penularan', 1), ('virus', 1), ('corona', 1), ('dikendalikan', 1)]
+    stop_words = set(stopwords.words('indonesian'))
+    vector_query = Query.translate(str.maketrans('','',string.punctuation)).lower()
+    tokenized_query = nltk.tokenize.word_tokenize(vector_query)
+    filtered_words = []
+    for word in tokenized_query:
+        if word not in stop_words:
+            filtered_words.append(word)
+    filtered_words = nltk.FreqDist(filtered_words)
+    filtered_words = filtered_words.most_common()
+    return filtered_words
+
+def get_listsemuadokumen():
+# Mengembalikan file yang terdapat dalam folder src/uploads
+# Untuk ditunjukkan pada website
+# Hasil: ['namafile1.html', 'namafile2.html']
+    path = os.path.dirname(os.path.abspath(__file__))
+    path_to_uploads = os.path.join(path, 'uploads')
+
+    list_namadokumen = os.listdir(path_to_uploads)
+    return list_namadokumen
+
+
+def get_linktoredirect(list_semuadokumen):
+# Menerima list nama dokumen yang berada pada file uploads
+# Mengembalikan list ditambahkan uploaded/ untuk redirect ketika memencet judul hasil query
+# Hasil: ["uploaded/filename", ...]
+    list_namadokumen = get_listsemuadokumen()
+    list_toreturn = []
+    for path in list_namadokumen:
+        string = "uploaded/" + path
+        list_toreturn.append(string)
+    return list_toreturn
+
+def scrape_local(InputQuery):
+    path = os.path.dirname(os.path.abspath(__file__))
+    path_to_uploads = os.path.join(path, 'uploads')
+
+    # List isi path ke folder uploads
+    list_dir = get_link_local(path_to_uploads)
+
+    # List title setiap dokumen
+    list_title_local = get_title_local(list_dir)
+
+    # List isi berita tiap dokumen
+    list_dokumen_local = get_document_local(list_dir)
+
+    # Query yang sudah dijadikan vektor
+    query = get_query(InputQuery)
+
+    # List berisi kalimat pertama tiap dokumen
+    list_fsentence_local = get_firstsentence(list_dokumen_local)
+
+    # List berisi kalimat yang sudah diproses menjadi vektor tiap dokumen
+    list_processedwords_local = get_vectorwords(list_dokumen_local)
+
+    # List similarity tiap dokumen terhadap query
+    list_similarity_local = get_similarity(query, list_processedwords_local)
+
+    # List banyak kata tiap dokumen
+    list_banyakkata_local = get_banyakkata(list_processedwords_local)
+
+    # List untuk list_link_local
+    list_alldocuments_local = get_listsemuadokumen()
+
+    # List berisi link ke dokumen tersebut
+    list_link_local = get_linktoredirect(list_alldocuments_local)
+
+    # Dictionary yang akan digunakan
+    scrape_result = [{
+                        "link"      : val[0],
+                        "title"     : val[1],
+                        "content"   : val[2],
+                        "words"     : val[3],
+                        "fsentence" : val[4],
+                        "similarity": val[5],
+                        "count"     : val[6]}
+                        for val in zip(list_link_local, list_title_local, list_dokumen_local, list_processedwords_local, list_fsentence_local, list_similarity_local, list_banyakkata_local)]
+    return scrape_result
+
+## Cek fungsi scrape_local
+#namadokumen = get_listsemuadokumen()
+#print_list(namadokumen)
+#dictionary = scrape_local("bola adalah kesukaan saya")
+#print(dictionary)
+
+
 
 # Check isi dari scraping_results)
 #print_similarity(scraping_results)
