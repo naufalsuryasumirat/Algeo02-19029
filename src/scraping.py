@@ -383,6 +383,41 @@ def scrape_local(InputQuery):
 
     return scrape_result
 
+def get_table(Query, List_dictionary):
+# List_dictionary merupakan search_result hasil scrape_local()
+# Query merupakan query
+# Hasil merupakan list table yang siap untuk ditunjukkan pada web
+# Hasil: [["word1", "word2", ...], [1, 1]]
+    lquery = get_query(Query)
+    # Sort query alphabetically, contoh: [('a', 3), ('b', 1), ...]
+    lquery = sorted(lquery, key = lambda x: x[0])
+    LQuery = []
+    LTable = []
+    for i in range(len(lquery)):
+        LQuery.append(lquery[i][0])
+    JQuery = [] # Berisi jumlah tiap kata dalam query
+    for i in range(len(lquery)):
+        JQuery.append(lquery[i][1]) # Mengambil jumlah dari list tuple
+    LTable.append(LQuery) # LTable menjadi [['word1query', 'word2query', ...]]
+    LTable.append(JQuery) # Menjadi [['word1', ...], [1, 2, ..]]
+    for dictionary in List_dictionary:
+        List = []
+        List_onlywords = [] # Berisi hanya kata saja dari dokumen yang sedang diproses
+        listdictionary = dictionary.get('words') 
+        # ^ Mengambil List_processedwords pada list of dictionaries search_result
+        for i in range(len(listdictionary)):
+            # Proses mengambil hanya kata saja pada list of tuple
+            List_onlywords.append(listdictionary[i][0])
+        for word in LQuery:
+            if word in List_onlywords: # Jika ada word nya, maka akan dicari jumlahnya
+                for i in range(len(listdictionary)):
+                    if (listdictionary[i][0] == word):
+                        List.append(listdictionary[i][1])
+            else: # Jika tidak terdapat word nya, maka akan dimasukkan 0
+                List.append(0)
+        LTable.append(List)
+    return LTable
+
 def vectorize_words(kata):
     stop_words = set(stopwords.words('indonesian'))
     vector = kata.translate(str.maketrans('', '', string.punctuation))
@@ -394,10 +429,6 @@ def vectorize_words(kata):
     filtered_words = nltk.FreqDist(filtered_words)
     filtered_words = filtered_words.most_common()
     return filtered_words
-
-def get_tabel(Query, List_dictionary):
-    list(List_dictionary.value('words'))
-    return
 
 ## Cek fungsi scrape_local
 #namadokumen = get_listsemuadokumen()

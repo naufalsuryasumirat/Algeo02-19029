@@ -1,10 +1,19 @@
-{% extends 'base.html' %}
-
-{% block head %}
-    <title>About Us</title>
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <meta http-equiv = "X-UA-Compatible" content = "ie-edge">
+    <link rel = "stylesheet" type="text/css" href = "{{ url_for('static', filename='css/static.css')}}">
+    <title>Algeo02-19029</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .about{
-            padding-bottom: 100px;
+            margin-top: 50px;
+        }
+        .about h3{
+            text-align: center;
+            padding-top: 50px;
         }
         .about p{
             color: #666;
@@ -12,11 +21,61 @@
             line-height: 25px;
             text-align: center;
         }
+        footer{
+            margin-top: 50px;
+            padding: 30px 0;
+            background-color: #24252A;
+            color: #fff;
+            text-align: center;
+        }
     </style>
-{% endblock %}    
-{% block body %}
+</head>
+<body>
+    <header>
+        <h1><a href="/">SEARCH</a></h1>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="upload">Upload</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="instructions">Instructions</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <section class = "about">
-        <h3>ABOUT</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <img src="{{url_for('static', filename = 'about.jpg')}}" width="30%" style="display: block; margin:auto;" >
+        <h3>ABOUT US</h3>
+        <p>Kami adalah mahasiswa IF semester 3 (2020/2021) dari Institut Teknologi Bandung. Prototype search engine ini dibuat dalam rangka pemenuhan tugas besar kelas Aljabar dan Geometri 2 2020/2021.</p>
+        <p>Pencarian dokumen pada prototype ini memanfaatkan teori ruang vektor dan cosinus search. Hasil cosinus antara dokumen dan input query yang terbesar ditampilkan sebagai dokumen teratas (paling relevan)</p>
+ 
+        <h3>REFERENSI</h3>
+        <p>=========</p>
+        <p>“Aplikasi Dot Product pada sistem temu balik aplikasi” by Rinaldi Munir</p>
+        <p>https://informatika.stei.itb.ac.id/~rinaldi.munir/AljabarGeometri/2020-2021/Algeo12Aplikasi-dot-product-pada-IR.pdf</p>
+        <p>"Create A Simple Search Engine Using Python" by Irfan Alghani Khalid</p>
+        <p>https://link.medium.com/yEtxO932Kab</p>
+        <p>“Create APIs with python and flask” by programming historian</p>
+        <p>https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask</p>
+        <p>“How to create a react flask project” by Miguel Grinberg</p>
+        <p>https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project</p>
+        <p>“Removing Stop Words with NLTK Python”</p>
+        <p>https://www.geeksforgeeks.org/removing-stop-wordsnltkpython/#:~:text=What%20are%20Stop%20words%3F,result%20of%20a%20search%20query</p>
+        <p>“A minimal Flask application”</p>
+        <p>https://flask.palletsprojects.com/en/1.1.x/quickstart/</p>
+        <p>Referensi berita pada html</p>
+        <p>https://bola.kompas.com/liga-inggris</p>
+        <p>“How to get the next page on Beautiful Soup” by DavidMM</p>
+        <p>https://medium.com/quick-code/how-to-get-the-next-page-on-beautiful-soup-85b743750df4</p>
+        <p>“Beautiful Soup Documentation”</p>
+        <p>https://www.crummy.com/software/BeautifulSoup/bs4/doc/</p>
+        <p>“Python: Convert multiple list into an array of dictionary” from stackoverflow</p>
+        <p>https://stackoverflow.com/questions/34236668/python-convert-multiple-list-into-an-array-of-dictionary</p>
+        <p>“Flask Documentation (1.1.x)”</p>
+        <p>https://flask.palletsprojects.com/_/downloads/en/1.1.x/pdf/</p>
     </section>
-{% endblock %}
+
+    <footer>
+        <small>Jordan - Nicho - Noler</small>
+    </footer>
+</body>
+</html>

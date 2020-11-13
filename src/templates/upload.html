@@ -1,10 +1,77 @@
+<!DOCTYPE html>
+<head>
+   <meta charset = "UTF-8">
+   <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+   <meta http-equiv = "X-UA-Compatible" content = "ie-edge">
+   <link rel = "stylesheet" type="text/css" href = "{{ url_for('static', filename='css/static.css')}}">
+   <title>Upload file</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+      .boxContainer{
+           margin: auto;
+           margin-top: 25px;
+           margin-bottom: 50px;
+           position: relative;
+           width: fit-content;
+           height: fit-content;
+           padding: 0px 10px;
+       }
+       .elementContainer{
+           width: 100%;
+           height: 100%;
+           vertical-align: middle;
+       }
+       .container {
+           width : 80%;
+           margin-top: 25px;
+           margin-bottom: 25px;
+           margin : 0 auto;
+       }
+       .container h1{
+           text-align: center;
+           font-size: 25px;
+           font-family: "Montserrat", sans-serif;
+       }
+       .footer{
+           position: fixed;
+           left: 0;
+           bottom: 0;
+           width: 100%;
+           padding: 30px 0;
+           background-color: #24252A;
+           color: #fff;
+           text-align: center;
+       }
+  </style>
+</head>
+<html lang = "en">
+  <body>
+       <header>
+           <h1><a href="/">SEARCH</a></h1>
+           <nav>
+               <ul class="nav__links">
+                   <li><a href="upload">Upload</a></li>
+                   <li><a href="about">About</a></li>
+                   <li><a href="instructions">Instructions</a></li>
+               </ul>
+           </nav>
+       </header>
 
-<html>
-   <body>
-      <form action = "http://localhost:5000/uploader" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
-      </form>   
+       <div class = "container">
+           <h1> Upload New Files</h1>
+       </div>
+
+       <div class = "boxContainer">
+           <table class="elementContainer">
+               <form method = "POST" enctype = "multipart/form-data">
+                   <input type = "file" multiple = "" name = "file[]" class = "span3"/>
+                   <input type = "submit" value = "Upload" class = "span2">
+               </form>
+           </table>    
+       </div>
+
+       <div class="footer">
+           <small>Jordan - Nicho - Noler</small>
+       </div>
    </body>
 </html>

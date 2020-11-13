@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta http-equiv = "X-UA-Compatible" content = "ie-edge">
+        <link rel = "stylesheet" type="text/css" href = "{{ url_for('static', filename='css/static.css')}}">
+        <title>Algeo02-19029</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {{ dropzone.load_css() }}
+    </head>
+    <body>
+        <header>
+            <h1><a href="/">SEARCH</a></h1>
+            <nav>
+                <ul class="nav__links">
+                    <li><a href="upload">Upload</a></li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="instructions">Instructions</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class = "container">
+            <div class = "row">
+                <dic class = "col">
+                    <h1>Upload your files here</h1>
+                    <hr>
+                    <form method = "POST" enctype = "multipart/form-data">
+                        <div class = "custom-file">
+                            <input type = "file" class = "custom-file-input" name = "file" id = "file">
+                            <label class = "custom-file-label" for = "file">Select file...</label>
+                        </div>
+                        <button type = "submit" class="btn btn-primary"></button>
+                    </form>
+                </dic>
+            </div>
+        </div>
+    </body>
+</html>

@@ -8,27 +8,29 @@
     <title>Algeo02-19029</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        table{
-	        display: table;
+        .instructions{
+            margin: 0 auto;
+            width: 80%;
+            margin-top: 50px;
         }
-        table tr td{
-            border : 1px solid black;
-            border-collapse: collapse;
-            display: block;
-            padding: auto;
-            text-align: left;
+        .instructions h3{
+            text-align: center;
+            padding-bottom: 25px;
         }
-        table tr{
-	        display: table-cell;
+        .instructions p{
+            color: #666;
+            word-spacing: 2px;
+            line-height: 25px;
+            text-align: center;
         }
         .footer{
             position: fixed;
             left: 0;
             bottom: 0;
-            padding: 30px 0;
             width: 100%;
+            padding: 30px 0;
             background-color: #24252A;
-            color: white;
+            color: #fff;
             text-align: center;
         }
     </style>
@@ -40,33 +42,19 @@
             <ul class="nav__links">
                 <li><a href="upload">Upload</a></li>
                 <li><a href="about">About</a></li>
-                <li><a href="instruction">Instructions</a></li>
+                <li><a href="instructions">Instructions</a></li>
             </ul>
         </nav>
     </header>
-    
-    <table style="width:80%">
-        <tr>
-            <td>Term</td>
-            {% for word in table[0] %}
-                <td>{{ word }}</td>
-            {% endfor %}
-        </tr>
-        <tr>
-            <td>Query</td>
-            {% for jumlah in table[1] %}
-                <td>{{ jumlah }}</td>
-            {% endfor %}
-        </tr>
-        {% for title in range(search_result | length) %}
-        <tr>
-                <td>{{ search_result[title]['title'] }}</td>
-                {% for jumlah in table[title + 2] %}
-                    <td>{{ jumlah }}</td>
-                {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+
+    <section class = "instructions">
+        <h3>INSTRUCTIONS</h3>
+        <p>1. Pilih menu UPLOAD kemudian upload file untuk proses search.</p>
+        <p>2. Kembali ke menu SEARCH dan masukkan query di search bar.</p>
+        <p>3. Akan muncul daftar dokumen diurutkan berdasarkan tingkat similaritas terbesar ke terendah.</p>
+        <p>4. Apabila ingin membaca dokumen, klik judul pada dokumen yang diberi warna biru.</p>
+        <p>5. Tabel dapat diakses di bagian bawah dari daftar dokumen.</p>
+    </section>
 
     <div class="footer">
         <small>Jordan - Nicho - Noler</small>
