@@ -195,7 +195,9 @@ def scrape():
     query = [('gol', 1), ('penalti', 1), ('kiper', 2), ('gawang', 2)] # Tidak digunakan dalam proses penentuan hasil searching pada web
 
     list_url = get_link("https://bola.kompas.com/liga-inggris")
+    # ["link1", "link2", ...]
     add_link(list_url, "?page=all#page2")
+    # ["link1?page=all#page2", ...]
 
     ## print isi list_url dengan rapi
     #print_list(list_url)
@@ -251,9 +253,6 @@ def scrape():
 
     # Memakai fungsi bawaan python untuk sort search_results berdasarkan similiarity
     # Similarity disini tidak berhubungan dengan input Query pengguna, hanya untuk scrape dokumen dari kompas.com
-    scraping_results = sorted(scraping_results, key = lambda k: k['similarity'], reverse = True)
-
-    toHTML(scraping_results)
     scraping_results = sorted(scraping_results, key = lambda k: k['similarity'], reverse = True)
 
     toHTML(scraping_results)
@@ -379,7 +378,26 @@ def scrape_local(InputQuery):
                         "similarity": val[5],
                         "count"     : val[6]}
                         for val in zip(list_link_local, list_title_local, list_dokumen_local, list_processedwords_local, list_fsentence_local, list_similarity_local, list_banyakkata_local)]
+    
+    scrape_result = sorted(scrape_result, key = lambda k: k['similarity'], reverse = True)
+
     return scrape_result
+
+def vectorize_words(kata):
+    stop_words = set(stopwords.words('indonesian'))
+    vector = kata.translate(str.maketrans('', '', string.punctuation))
+    vectorized = nltk.tokenize.word_tokenize(vector)
+    filtered_words = []
+    for word in vectorized:
+        if word not in stop_words:
+            filtered_words.append(word)
+    filtered_words = nltk.FreqDist(filtered_words)
+    filtered_words = filtered_words.most_common()
+    return filtered_words
+
+def get_tabel(Query, List_dictionary):
+    list(List_dictionary.value('words'))
+    return
 
 ## Cek fungsi scrape_local
 #namadokumen = get_listsemuadokumen()

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1">
+    <title>Search</title>
+</head>
+<body>    
+{% for dict_item in search_result %}
+    <h3><a href = {{dict_item['link']}}>Title : {{dict_item['title']}}</a></h3>
+    <p>Jumlahkata : {{dict_item['count']}}</p>
+    <p>Similarity : {{dict_item['similarity'] * 100}} % </p>
+    <p>Fsentence : {{dict_item['fsentence']}}</p>
+{% endfor %}
+</body>
+</html>
