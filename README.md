@@ -19,9 +19,7 @@ List library yang digunakan:
 5. Beautiful Soup
 6. Requests
 7. Flask
-8. Flask_SQLAlchemy
-9. lxml (tentative)
-10. cssselect (tentative)
+8. lxml
 
 ## Setup
 ### Tugas Besar ini menggunakan python3
@@ -33,7 +31,7 @@ List library yang digunakan:
 6. Buka Folder hasil clone repository ini pada VSCode dan ketik *.\src\Algeo\Scripts\activate* dalam terminal VSCode
 7. Pastikan Terminal VSCode berada pada directory dengan akhiran Algeo02-19029>
 
-Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
+Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .src\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
 
 ## Screenshots
 ![guide_1](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/master/images/guide_1?raw=true)
