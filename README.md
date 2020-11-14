@@ -30,6 +30,11 @@ List library yang digunakan:
 5. Ganti directory pada file pyenv.cfg dalam folder Algeo dengan directory tempat install python.exe (Ganti "noler" dengan nama user pada windows yang digunakan atau ganti dengan directory ke python.exe)
 6. Buka Folder hasil clone repository ini pada VSCode dan ketik *.\src\Algeo\Scripts\activate* dalam terminal VSCode
 7. Pastikan Terminal VSCode berada pada directory dengan akhiran Algeo02-19029>
+8. Jalankan app.py
+9. Program akan melakukan proses scraping dan menyimpan hasilnya sebagai html pada folder test
+10. Buka web-browser localhost:5000
+11. Pilih upload pada top bar home page untuk upload file hasil scraping
+12. Instruksi lebih lanjut ada pada page localhost:5000/instructions (dapat diakses pada tombol instructions pada bagian atas home page)
 
 Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .src\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
 
