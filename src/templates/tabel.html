@@ -4,10 +4,63 @@
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <meta http-equiv = "X-UA-Compatible" content = "ie-edge">
-    <link rel = "stylesheet" type="text/css" href = "{{ url_for('static', filename='css/static.css')}}">
     <title>Algeo02-19029</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
+        *{
+            box-sizing: border-box;
+            padding:0;
+            margin:0;
+            font-family: sans-serif;
+        }
+
+        li, a{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            color: #edf0f1;
+            text-decoration: none;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background-color: #24252A;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        header h1{
+            display: inline-block;
+            padding: 0px 20px;
+        }
+
+        header h1 a{
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        header h1 a:hover{
+            color: #0088a9;
+        }
+
+        .nav__links{
+            list-style: none;
+        }
+
+        .nav__links li{
+            display: inline-block;
+            padding: 0px 20px;
+        }
+
+        .nav__links li a:hover{
+            color: #0088a9;
+        }
         table{
 	        display: table;
         }
@@ -31,6 +84,51 @@
             color: white;
             text-align: center;
         }
+        table.fixed { 
+            margin : auto;
+            position : absolute;
+            top : 0; left : 0; bottom : 0px; right : 0;
+            table-layout : fixed; 
+            align-items: center;
+            justify-content: center;
+            word-wrap: break-word;
+            text-align: center;
+        }
+        table.fixed td { 
+            overflow : hidden; 
+            width : 100px;
+            height : 30px;
+        }
+        table.fixed td.top {
+            text-align : center;
+            background-color : #24252A;
+            color : white;
+            height : 20px;
+        }
+        .redirect {
+            color : #edf0f1;
+        }
+        .redirect:hover {
+            color : #0088a9;
+        }
+        /* Custom Scrollbar */
+        /* lebar */
+        ::-webkit-scrollbar {
+            width : 10px;
+            height : 10px;
+        }
+        /* tracking */
+        ::-webkit-scrollbar-track {
+            background : #24252A;
+        }
+        /* handling */
+        ::-webkit-scrollbar-thumb {
+            background : #555;
+        }
+        /* hovering */
+        ::-webkit-scrollbar-thumb:hover{
+            background : grey;
+        }
     </style>
 </head>
 <body>
@@ -40,29 +138,41 @@
             <ul class="nav__links">
                 <li><a href="upload">Upload</a></li>
                 <li><a href="about">About</a></li>
-                <li><a href="instruction">Instructions</a></li>
+                <li><a href="instructions">Instructions</a></li>
             </ul>
         </nav>
     </header>
     
-    <table style="width:80%">
+    <table class = "fixed">
         <tr>
-            <td>Term</td>
-            {% for word in table[0] %}
-                <td>{{ word }}</td>
+            <td class = "top">Term</td>
+            {% for word in range (table[0] | length) %}
+                {% if word % 2 != 0 %}
+                    <td>{{ table[0][word] }}</td>
+                {% else %}
+                    <td bgcolor = "lightgrey">{{ table[0][word] }}</td>
+                {% endif %}
             {% endfor %}
         </tr>
         <tr>
-            <td>Query</td>
-            {% for jumlah in table[1] %}
-                <td>{{ jumlah }}</td>
+            <td class = "top">Query</td>
+            {% for jumlah in range (table[1] | length) %}
+                {% if jumlah % 2 != 0 %}
+                    <td>{{ table[1][jumlah] }}</td>
+                {% else %}
+                    <td bgcolor = "lightgrey">{{ table[1][jumlah] }}</td>
+                {% endif %}
             {% endfor %}
         </tr>
         {% for title in range(search_result | length) %}
         <tr>
-                <td>{{ search_result[title]['title'] }}</td>
-                {% for jumlah in table[title + 2] %}
-                    <td>{{ jumlah }}</td>
+                <td class = "top"><a class = "redirect" href = {{search_result[title]['link']}}>{{ search_result[title]['nama'] }}</a></td>
+                {% for jumlah in range (table[title + 2] | length) %}
+                    {% if jumlah % 2 != 0 %}
+                        <td>{{ table[title + 2][jumlah] }}</td>
+                    {% else %}
+                        <td bgcolor = "lightgrey">{{ table[title + 2][jumlah] }}</td>
+                    {% endif %}
                 {% endfor %}
         </tr>
         {% endfor %}

@@ -60,10 +60,23 @@
             font-size: 25px;
             color: #0000FF;
         }
+        .container h3 a:hover{
+            font-weight: bold;
+        }
         .container p{
             font-family: sans-serif;
             text-align: justify;
             word-spacing: 2px;
+        }
+        .show_results p {
+            width : 90%;
+            margin : 0 auto;
+            margin-bottom : 20px;
+            font-family: sans-serif;
+            text-align: justify;
+            word-spacing: 2px;
+            font-size : 20px;
+            color : rgb(145, 144, 144);
         }
         .container h2{
             text-align: center;
@@ -90,6 +103,9 @@
             font-family: sans-serif;
             font-size: 18px;
             color:#454545;
+            width: 45%;
+            margin: auto;
+            margin-top: 10px;
         }
         footer{
             margin-top: 50px;
@@ -100,6 +116,23 @@
         }
         footer small a:hover{
             color: #0088a9;
+        }
+        /* Custom Scrollbar */
+        /* lebar */
+        ::-webkit-scrollbar {
+            width : 10px;
+        }
+        /* tracking */
+        ::-webkit-scrollbar-track {
+            background : white;
+        }
+        /* handling */
+        ::-webkit-scrollbar-thumb {
+            background : #24252A;
+        }
+        /* hovering */
+        ::-webkit-scrollbar-thumb:hover{
+            background : #555;
         }
     </style>
 </head>
@@ -120,9 +153,12 @@
         {% if (files | length) == 0 %}
             <p>Empty</p>
         {% endif %}
+        <p>
         {% for file in range(files | length) %}
-        <p>{{file + 1}}. {{ files[file] }}</p>
+            {{ files[file] }} {%- if file != ((files|length) - 1) -%}, {% endif %}
         {% endfor %}
+        </p>
+        <p><b> {{(files | length)}} total dokumen </b></p>
     </div>
 
     <div class = "boxContainer">
@@ -139,12 +175,14 @@
     </div>
 
     <hr>
-
+    <div class = "show_results">
+        <p> Showing results for "{{ unprocessed_query }}" </p>
+    </div>
     {% for dict_item in search_result %}
     <div class = "container">
-        <h3><a href = {{dict_item['link']}}>Title : {{dict_item['title']}}</a></h3>
+        <h3><a href = {{dict_item['link']}}>{{dict_item['title']}}</a></h3>
         <p>Jumlah kata     : {{dict_item['count']}}</p>
-        <p>Similarity      : {{dict_item['similarity'] * 100}} % </p>
+        <p>Similarity      : {{'%0.2f' | format((dict_item['similarity'] * 100) | float)}}% </p>
         <p>Kalimat pertama : {{dict_item['fsentence']}}</p>
     </div>
     {% endfor %}

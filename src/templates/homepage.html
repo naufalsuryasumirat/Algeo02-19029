@@ -1,12 +1,37 @@
-{% extends 'base.html' %}
-
-{% block head %}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <meta http-equiv = "X-UA-Compatible" content = "ie-edge">
+    <link rel = "stylesheet" type="text/css" href = "{{ url_for('static', filename='css/static.css')}}">
     <title>Algeo02-19029</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        .container1{
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        .container1 h2{
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            text-align: center;
+            color:#454545;
+        }
+        .container1 p{
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 18px;
+            color:#454545;
+            width: 45%;
+            margin: auto;
+            margin-top: 10px;
+        }
         .boxContainer{
             margin: auto;
-            margin-top: 5%;
+            margin-top: 30px;
+            margin-bottom: 50px;
             position: relative;
             width: 300px;
             height: 42px;
@@ -19,7 +44,7 @@
             height: 100%;
             vertical-align: middle;
         }
-        .search{
+        .form-control{
             border: none;
             height: 100%;
             width: 100%;
@@ -30,26 +55,72 @@
             color:#24252A;
             font-weight: 500;
         }
-        .search:focus{
+        .form-control:focus{
             outline: none;
         }
-        .elementContainer tr td a{
+        .elementContainer td a{
             font-size: 26;
             color: #24252A;
         }
+        .footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 30px 0;
+            background-color: #24252A;
+            color: #fff;
+            text-align: center;
+        }
+        .image{
+            margin-top: 10%;
+        }
     </style>
-{% endblock %}    
-{% block section %}
+</head>
+<body>
+    <header>
+        <h1><a href="/">SEARCH</a></h1>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="upload">Upload</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="instructions">Instructions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class = "image">
+        <img src = "{{url_for('static', filename = 'logo2.jpg')}}" width = "25%" style = "display: block; margin: auto;">
+    </div>
+
     <div class = "boxContainer">
         <table class="elementContainer">
-            <tr>
+            <form method = "POST">
                 <td>
-                    <input type="text" placeholder="Search" class="search">
+                    <input type="text" placeholder="Search" class="form-control" name = "query" id = "query">
                 </td>
                 <td>
-                    <a href="#"><i class="fa fa-search"></i></a>
+                    <a><i class="fa fa-search"></i></a>
                 </td>
-            </tr>
+            </form>
         </table>
     </div>
-{% endblock %}
+
+    <div class = "container1">
+        <h2>Daftar Dokumen</h2>
+        {% if (files | length) == 0 %}
+            <p>Empty</p>
+        {% endif %}
+        <p>
+        {% for file in range(files | length) %}
+            {{ files[file] }} {%- if file != ((files|length) - 1) -%}, {% endif %}
+        {% endfor %}
+        </p>
+        <p><b> {{(files | length)}} total dokumen </b></p>
+    </div>
+
+    <div class="footer">
+        <small>Jordan - Nicho - Noler</small>
+    </div>
+</body>
+</html>

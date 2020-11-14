@@ -129,16 +129,15 @@ def get_banyakkata(List_processedwords):
 # Menerima input List hasil get_vectorwords
 # Mengembalikan banyak kata (yang sudah di hilangkan stopwords)
 # Hasil list of integers
-    jumlah = 0
     list_jumlah = []
     for i in range (len(List_processedwords)):
+        jumlah = 0
         for j in range (len(List_processedwords[i])):
             jumlah = jumlah + List_processedwords[i][j][1]
         list_jumlah.append(jumlah)
     return list_jumlah
 ## Fungsi belom dicek tolong dicek nanti
 
-# TAMBAHIN QUERY DALEM FUNGSI INI
 def get_allwordsfromalldocuments(List_document):
 # Menerima input list dokumen yang telah diambil
 # Memproses untuk mendapatkan semua kata dalam semua dokumen
@@ -171,21 +170,121 @@ def get_allwordsfromalldocuments(List_document):
     list_onlywords = sorted(list_onlywords)
     return list_onlywords
 
-def print_similarity(ListofDictionary_results):
-# Untuk check jika similarity telah diurut
-    for x in ListofDictionary_results:
-        print(x['similarity'])
-    
 def toHTML(scrape_result):
+# Untuk save hasil scraping dari kompas.com sebagai html untuk di upload
     for scrape in range (len(scrape_result)):
         savedHTML = open("test/" + str(scrape + 1) + ".html", "w")
-        toSave = "<html><head><title>"
+        toSave = """<!DOCTYPE html><html lang = 'en'><head>
+            <meta charset = "UTF-8">
+            <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+            <meta http-equiv = "X-UA-Compatible" content = "ie-edge">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
+                *{
+                    box-sizing: border-box;
+                    padding:0;
+                    margin:0;
+                    font-family: sans-serif;
+                }
+
+                li, a{
+                    font-family: "Montserrat", sans-serif;
+                    font-weight: 500;
+                    font-size: 16px;
+                    color: #edf0f1;
+                    text-decoration: none;
+                }
+
+                header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 15px 10%;
+                    background-color: #24252A;
+                }
+
+                header h1{
+                    display: inline-block;
+                    padding: 0px 20px;
+                }
+
+                header h1 a{
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+
+                header h1 a:hover{
+                    color: #0088a9;
+                }
+
+                .nav__links{
+                    list-style: none;
+                }
+
+                .nav__links li{
+                    display: inline-block;
+                    padding: 0px 20px;
+                }
+
+                .nav__links li a:hover{
+                    color: #0088a9;
+                }
+                .article h2 a:hover{
+                    color : gray;
+                }
+                .article h2{
+                    text-align : center;
+                    padding-bottom : 30px;
+                    margin-top : 50px;
+                }
+                .article h2 a{
+                    color : black;
+                    font-size : 32px;
+                    font-weight : bold;
+                    font-family : "Montserrat", sans-serif;
+                }
+                .article p{
+                    text-align : justify;
+                    font-size : 20px;
+                    width : 80%;
+                    font-family: sans-serif;
+                    margin : 0 auto;
+                }
+                .footer{
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    padding: 30px 0;
+                    background-color: #24252A;
+                    color: #fff;
+                    text-align: center;
+                }
+            </style>
+        <title>"""
         toSave += scrape_result[scrape].get("title")
-        toSave += "</title></head><body><h1>"
+        toSave += "</title></head>"
+        toSave += """<header>
+        <h1><a href="/">SEARCH</a></h1>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="../upload">Upload</a></li>
+                <li><a href="../about">About</a></li>
+                <li><a href="../instructions">Instructions</a></li>
+            </ul>
+        </nav>
+    </header>"""
+        toSave += """<body><div class = "article"><h2><a href="""
+        toSave += scrape_result[scrape].get("link")
+        toSave += ">"
         toSave += scrape_result[scrape].get("title")
-        toSave += "</h1><p>"
+        toSave += "</a></h2><p>"
         toSave += scrape_result[scrape].get("content")
-        toSave += "</p></body></html>"
+        toSave += "</p></div></body>"
+        toSave += """"  <div class="footer">
+                        <small>Jordan - Nicho - Noler</small>
+                        </div></html>   """
         savedHTML.write(toSave)
         savedHTML.close()
 
@@ -239,8 +338,6 @@ def scrape():
     #print(len(list_allwords))
 
     # Hasil search dalam bentuk list of dictionaries
-    ## BUAT FUNGSI GET_SEARCHRESULTS?
-    ## SORT BERDASARKAN VALUE SIMILARITY
     scraping_results = [{
                         "link"      : val[0], 
                         "title"     : val[1], 
@@ -253,8 +350,9 @@ def scrape():
 
     # Memakai fungsi bawaan python untuk sort search_results berdasarkan similiarity
     # Similarity disini tidak berhubungan dengan input Query pengguna, hanya untuk scrape dokumen dari kompas.com
+    # Karena ada penggantian dalam pembuata web Query dalam fungsi ini tidak mencerminkan query user
     scraping_results = sorted(scraping_results, key = lambda k: k['similarity'], reverse = True)
-
+    # Save hasil sebagai html untuk di upload
     toHTML(scraping_results)
 
 def get_link_local(path_to_uploads_folder):
@@ -270,6 +368,15 @@ def get_link_local(path_to_uploads_folder):
         list_directory.append(pathdir)
     return list_directory
 
+def get_filename(path_to_uploads_folder):
+# Menerima path ke folder uploads pada src/
+# Mengirimkan nama file untuk menjadi key pada dictionary untuk setiap "file"
+# Bentuk input : path = os.path.dirname(os.path.abspath(__file__))
+#                path_to_uploads = os.path.join(path, 'uploads')
+# Hasil sebuah list berisi nama file tersebut seperti : ["1.html", "2.html", ...]
+    list_namafile = os.listdir(path_to_uploads_folder)
+    return list_namafile
+
 def get_title_local(List_directory):
 # Menerima List directory ke setiap file dalam src/uploads
 # (karena hasil upload file pada web disimpan di src/uploads)
@@ -278,20 +385,36 @@ def get_title_local(List_directory):
     for path in List_directory:
         document_html = open(path)
         soup = BeautifulSoup(document_html, 'lxml')
-        title = soup.find('h1')
+        title = soup.find('h2')
         list_title.append(title.text.strip())
     return list_title
 
 def get_document_local(List_directory):
 # Menerima list directory ke setiap file dalam src/uploads
 # Mengambil isi berita dan mengembalikannya dalam bentuk list
+# Judul termasuk dalam list ini
 # Hasil : ["dokumen1", "dokumen2"]
-## Setelah itu menggunakan get_firstsentence untuk mendapatkan list kalimat pertamanya
+## Akan digunakan untuk perhitungan similarity (judul termasuk dalam perhitungan)
     List_document = []
     for path in List_directory:
         document_html = open(path)
         soup = BeautifulSoup(document_html, 'lxml')
-        teks_artikel = soup.find('body')
+        teks_artikel = soup.find('div', class_="article")
+        string_teks = teks_artikel.get_text()
+        List_document.append(string_teks)
+    return List_document
+
+def get_only_document_without_title(List_directory):
+# Menerima list directory ke setiap file dalam src/uploads
+# Mengambil isi berita dan mengembalikan dalam bentuk list
+# Judul tidak termasuk dalam list ini
+# Hasil : ["dokumen1", "dokumen2"]
+## Seteleh itu menggunakan get_firstsentence untuk mendapatkan list kalimat pertamanya
+    List_document = []
+    for path in List_directory:
+        document_html = open(path)
+        soup = BeautifulSoup(document_html, 'lxml')
+        teks_artikel = soup.find('p')
         string_teks = teks_artikel.get_text()
         List_document.append(string_teks)
     return List_document
@@ -335,7 +458,10 @@ def get_linktoredirect(list_semuadokumen):
     return list_toreturn
 
 def scrape_local(InputQuery):
+    # Absolute path ke file ini
     path = os.path.dirname(os.path.abspath(__file__))
+    # Menambahkan absolute path di atas untuk menuju ke folder uploads
+    # Yaitu folder penyimpanan upload dari user
     path_to_uploads = os.path.join(path, 'uploads')
 
     # List isi path ke folder uploads
@@ -347,11 +473,14 @@ def scrape_local(InputQuery):
     # List isi berita tiap dokumen
     list_dokumen_local = get_document_local(list_dir)
 
+    # List berisi hanya dokumen saja tanpa judul
+    list_hanya_dokumen = get_only_document_without_title(list_dir)
+
     # Query yang sudah dijadikan vektor
     query = get_query(InputQuery)
 
     # List berisi kalimat pertama tiap dokumen
-    list_fsentence_local = get_firstsentence(list_dokumen_local)
+    list_fsentence_local = get_firstsentence(list_hanya_dokumen)
 
     # List berisi kalimat yang sudah diproses menjadi vektor tiap dokumen
     list_processedwords_local = get_vectorwords(list_dokumen_local)
@@ -368,7 +497,10 @@ def scrape_local(InputQuery):
     # List berisi link ke dokumen tersebut
     list_link_local = get_linktoredirect(list_alldocuments_local)
 
-    # Dictionary yang akan digunakan
+    # List berisi nama file
+    list_filename = get_filename(path_to_uploads)
+
+    # Lidy of Dictionary yang akan digunakan
     scrape_result = [{
                         "link"      : val[0],
                         "title"     : val[1],
@@ -376,8 +508,9 @@ def scrape_local(InputQuery):
                         "words"     : val[3],
                         "fsentence" : val[4],
                         "similarity": val[5],
-                        "count"     : val[6]}
-                        for val in zip(list_link_local, list_title_local, list_dokumen_local, list_processedwords_local, list_fsentence_local, list_similarity_local, list_banyakkata_local)]
+                        "count"     : val[6],
+                        "nama"      : val[7]}
+                        for val in zip(list_link_local, list_title_local, list_dokumen_local, list_processedwords_local, list_fsentence_local, list_similarity_local, list_banyakkata_local, list_filename)]
     
     scrape_result = sorted(scrape_result, key = lambda k: k['similarity'], reverse = True)
 

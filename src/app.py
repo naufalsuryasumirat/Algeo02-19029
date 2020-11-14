@@ -1,13 +1,12 @@
 import os
 from flask import Flask, request, render_template, url_for, redirect, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from flask_dropzone import Dropzone
 from scraping import *
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 
 ## Menjalankan proses scrape
-#scrape()
+scrape()
 
 # Extention yang diperbolehkan untuk upload
 ALLOWED_EXTENSIONS = {'html'}
@@ -18,8 +17,6 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Directory tempat penyimpanan hasil upload user
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-dropzone = Dropzone(app)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -33,6 +30,8 @@ files = get_listsemuadokumen()
 query = ""
 # Tabel untuk diperlihatkan di web (dalam bentuk list)
 table = []
+# Query user yang tidak diproses terlebih dahulu
+unprocessed_query = ""
 
 ## HOME PAGE
 @app.route('/')
@@ -49,9 +48,10 @@ def search_text():
     global files
     files = get_listsemuadokumen()
     if request.method == "POST":
-        global query, search_result
+        global query, search_result, unprocessed_query
         query = ""
         query += request.form['query']
+        unprocessed_query = request.form['query']
         ## Cek jika input query valid atau tidak
         ## Jika hanya mengandung stop words maka tidak valid
         ## Jika hanya spasi maka tidak valid
@@ -65,19 +65,20 @@ def search_text():
 @app.route('/search', methods = ['GET', 'POST'])
 def searching():
     ## Mengupdate list files jika files di delete
-    global query, search_result, files, table
+    global query, search_result, files, table, unprocessed_query
     files = get_listsemuadokumen()
     search_result = scrape_local(query)
     table = get_table(query, search_result)
     if request.method == "POST":
         query2 = ""
         query2 += request.form['query']
+        unprocessed_query = request.form['query']
         if len(get_query(query2)) == 0:
             return redirect(request.url)
         else:
             query = query2
             return redirect(request.url)
-    return render_template('search.html', search_result = search_result, files = files)
+    return render_template('search.html', search_result = search_result, files = files, unprocessed_query = unprocessed_query)
 
 ## File yang telah diupload untuk diakses nantinya
 ### Contoh /uploaded/1.html jika upload 1.html
