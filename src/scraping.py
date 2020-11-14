@@ -562,37 +562,3 @@ def vectorize_words(kata):
     filtered_words = nltk.FreqDist(filtered_words)
     filtered_words = filtered_words.most_common()
     return filtered_words
-
-## Cek fungsi scrape_local
-#namadokumen = get_listsemuadokumen()
-#print_list(namadokumen)
-#dictionary = scrape_local("bola adalah kesukaan saya")
-#print(dictionary)
-
-
-
-# Check isi dari scraping_results)
-#print_similarity(scraping_results)
-#print(search_results[0])
-##Cara ngambil value dari list of dictionary:
-#search_results[i].get("content")
-#^^ngambil isi berita
-
-# to scrape: 
-# 1. text dari news article tag class_='read__content'
-# 2. title dari news article h1 > class = 'read__title', coba h1 tag dulu baru read__title atau find class langsung
-# 3. link tadi
-# 4. 
-# jadiin dictionary [link, judul, text, parsed_text, kalimat_pertama] //bisa ada update kalo butuh yang lain
-# tambahin hasil similarity dengan query
-
-
-## TENTUIN BERAPA DOKUMEN YANG MAU DIAMBIL
-## PAKE FOR LOOP BUAT NEXT PAGE
-
-## BERSIHIN GITHUB
-## src berisi source code
-## test berisi dokumen uji
-## doc berisi laporan
-
-## Delete file yang gaperlu di github
