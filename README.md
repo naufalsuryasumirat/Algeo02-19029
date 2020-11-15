@@ -9,6 +9,7 @@
 * [Library](#library)
 * [Setup](#setup)
 * [Screenshots](#screenshots)
+* [LibraryGuide](#libraryguide)
 
 ## Library
 List library yang digunakan:
@@ -20,6 +21,7 @@ List library yang digunakan:
 6. Requests
 7. Flask
 8. lxml
+9. Werkzeug
 
 ## Setup
 ### Tugas Besar ini menggunakan python3
@@ -40,8 +42,19 @@ app.py menggunakan scraping.py (menjalankan proses scraping dari https://bola.ko
 
 Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .src\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
 
+### Setup Library jika tidak dapat menggunakan Virtual Environment
+1. NLTK (pip3 install nltk dan jalankan program nltkinstall.py)
+2. Sastrawi (pip3 install Sastrawi)
+3. Math
+4. Beautiful Soup (pip3 install beautifulsoup4)
+5. requests (pip3 install requests)
+6. Flask (pip3 install Flask)
+7. lxml (pip3 install lxml)
+8. Werkzeug (pip3 install Werkzeug)
+
 ## Screenshots
 ![guide_1](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_1.jpg?raw=true)
+![guide_12](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_12.jpg?raw=true)
 ![guide_2](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_2.jpg?raw=true)
 ![guide_3](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_3.jpg?raw=true)
 ![guide_4](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_4.jpg?raw=true)
@@ -52,3 +65,15 @@ Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan d
 ![guide_9](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_9.jpg?raw=true)
 ![guide_10](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_10.jpg?raw=true)
 ![guide_11](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_11.jpg?raw=true)
+
+## LibraryGuide
+Khusus untuk NLTK harus menjalankan nltkinstall.py untuk menginstall package nltk (all packages)
+![guide2_1](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_1.jpg?raw=true)
+![guide2_2](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_2.jpg?raw=true)
+![guide2_9](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_9.jpg?raw=true)
+![guide2_3](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_3.jpg?raw=true)
+![guide2_4](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_4.jpg?raw=true)
+![guide2_5](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_5.jpg?raw=true)
+![guide2_6](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_6.jpg?raw=true)
+![guide2_7](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_7.jpg?raw=true)
+![guide2_8](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_8.jpg?raw=true)
