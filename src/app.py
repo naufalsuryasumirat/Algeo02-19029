@@ -1,6 +1,5 @@
 import os
 from flask import Flask, request, render_template, url_for, redirect, flash, send_from_directory
-from flask_sqlalchemy import SQLAlchemy
 from scraping import *
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
