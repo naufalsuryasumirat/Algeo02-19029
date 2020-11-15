@@ -55,7 +55,9 @@ Untuk menggunakan NLTK harus menjalankan nltkinstall.py terlebih dahulu setelah 
 8. Werkzeug (pip3 install Werkzeug)
 ### Alternatif install Library yang digunakan
 Buka folder hasil clone git ini
+
 Contoh path terminal: PS C:\Users\Noler\Git\Algeo02-19029>
+
 Tuliskan pip install -r requirements.txt untuk menginstall seluruh library yang digunakan
 
 ### Pastikan ketika menjalankan program berada pada di directory Algeo02-19029 dan *bukan* dalam folder src
