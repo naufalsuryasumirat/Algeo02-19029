@@ -54,6 +54,7 @@ Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan d
 
 ## Screenshots
 ![guide_1](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_1.jpg?raw=true)
+![guide_12](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_12.jpg?raw=true)
 ![guide_2](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_2.jpg?raw=true)
 ![guide_3](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_3.jpg?raw=true)
 ![guide_4](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_4.jpg?raw=true)
