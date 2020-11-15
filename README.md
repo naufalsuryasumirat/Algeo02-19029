@@ -9,7 +9,7 @@
 * [Library](#library)
 * [Setup](#setup)
 * [Screenshots](#screenshots)
-* [Library_Guide](#library_guide)
+* [LibraryGuide](#libraryguide)
 
 ## Library
 List library yang digunakan:
@@ -65,7 +65,7 @@ Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan d
 ![guide_10](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_10.jpg?raw=true)
 ![guide_11](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide_11.jpg?raw=true)
 
-## Library Guide
+## LibraryGuide
 Khusus untuk NLTK harus menjalankan nltkinstall.py untuk menginstall package nltk (all packages)
 ![guide2_1](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_1.jpg?raw=true)
 ![guide2_2](https://github.com/naufalsuryasumirat/Algeo02-19029/blob/main/images/guide2_2.jpg?raw=true)
