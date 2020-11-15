@@ -41,6 +41,8 @@ List library yang digunakan:
 app.py menggunakan scraping.py (menjalankan proses scraping dari https://bola.kompas.com/liga-inggris, sekaligus yang menghitung similaritas query dengan dokumen yang telah diupload)
 
 Tiap library yang digunakan sudah terdapat dalam virtual environment Algeo dan dapat digunakan jika sudah menginstall virtualenv dan menuliskan .src\Algeo\Scripts\activate pada terminal VSCode lalu menjalankan app.py. Jika tidak bisa digunakan maka harus install list library di atas.
+### Update
+Untuk menggunakan NLTK harus menjalankan nltkinstall.py terlebih dahulu setelah menggunakan virtual environment Algeo dan sudah mengganti path pada pyenv.cfg, kemudian pilih all packages untuk download semua package yang digunakan dalam program ini
 
 ### Setup Library jika tidak dapat menggunakan Virtual Environment
 1. NLTK (pip3 install nltk dan jalankan program nltkinstall.py)
