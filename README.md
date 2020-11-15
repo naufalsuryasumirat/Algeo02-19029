@@ -9,7 +9,7 @@
 * [Library](#library)
 * [Setup](#setup)
 * [Screenshots](#screenshots)
-* [Library Guide](#library guide)
+* [Library_Guide](#library_guide)
 
 ## Library
 List library yang digunakan:
